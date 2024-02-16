@@ -2,29 +2,35 @@
 
 [**MockAPI**](https://github.com/mihneamanolache/MockAPI) is a powerful mock data API designed to streamline the development and testing of applications by providing dynamic and customizable mock data. Leveraging Express, Faker, and Knex, MockAPI offers a range of tools for generating, creating, and validating mock API endpoints based on predefined schemas.
 
-## Installation
-Clone the repository and install the dependencies using npm:
+## Quick start
+Get started with MockAPI by cloning the repository and installing dependencies using npm:
 ```bash
 git clone https://github.com/mihneamanolache/MockAPI
 cd MockAPI
 npm install
 ```
 
-## Installation
-Compile TypeScript source code to JavaScript, run migrations and start the production server:
+Next, compile TypeScript to JavaScript, run migrations, and start the server:
 ```bash
 npm run build 
 npm run migrate
 npm run start:prod
 ```
 
-## API Endpoints:
+## Available Endpoints:
+MockAPI comes with three predefined endpoints and allows you to create as many custom ones as needed:
+- `GET /getTypes`           - get available mock data types (from FakerJS)
+- `POST /checkSchema`       - test if your schema is valid before creating a new route
+- `POST /createEndpoint`    - create a new mock API route
 
-### Get Allowed Types
+If no `PORT` variable is defined, the default port is 3000, and you can access the API at `http://localhost:3000`:
+
+### Getting Data Types
+To access available data types from FakerJS:
 ```bash
-# GET /getTypes
 curl http://localhost:3000/getTypes
 ```
+Response:
 ```json
 {
     "types": [
@@ -39,34 +45,75 @@ curl http://localhost:3000/getTypes
 }
 ```
 
-### Check if Schema is Valid
+### Validating Your Schema
+Before creating a new mock API route, test if the schema is valid with a POST request:
 ```bash
-# POST /checkSchema
-curl -X POST -H "Content-Type: application/json" -d '{"location": "location.streetName", "animals": {"lions[]": "animal.lion", "birds[]": "animal.bird"}, "number": "datatype.number", "paths[]": "system.filePath"}' http://localhost:3000/checkSchema
+curl -X POST \
+-H "Content-Type: application/json" \
+-d '{
+  "location": "location.streetName",
+  "animals": {
+    "lions[]": "animal.lion",
+    "birds[]": "animal.bird"
+  },
+  "number": "datatype.number",
+  "paths[]": "system.filePath"
+}' http://localhost:3000/checkSchema
 ```
+Response:
 ```json
 {
     "valid": true
 }
 ```
 
-### Create New MockAPI Endpoint
+### Creating a New Endpoint
+Use the POST /createEndpoint route to create a new mock API route. Provide a payload adhering to the `IResource` interface:
+```typescript
+IResource {
+    name:           string;     // ie. "zoo" || "api/zoo" || "api/zoos/my-zoo"
+    method?:        HttpMethod; // GET | POST | PUT etc.
+    schema:         JSON;       // JSON object
+    is_list?:       boolean;    // Should the schema be returned as a list?
+    status_code:    number      // HTTP response status code
+}
+```
+**Note:** If`is_list` flag is enabled, the response will consist of an array containing replicated schema instances.
+
+Example:
 ```bash
-# POST /createEndpoint
-curl -X POST -H "Content-Type: application/json" -d '{"name": "zoo", "method": "GET", "schema": { "location": "location.streetName", "animals": {"lions[]": "animal.lion", "birds[]": "animal.bird", "bears[]": "animal.bear"} }, "is_list": false, "status_code": 200}' http://localhost:3000/createEndpoint
+curl -X POST \
+-H "Content-Type: application/json" \
+-d '{
+  "name": "zoo",
+  "method": "GET",
+  "schema": {
+    "location": "location.streetName",
+    "animals": {
+      "lions[]": "animal.lion",
+      "birds[]": "animal.bird",
+      "bears[]": "animal.bear"
+    }
+  },
+  "is_list": false,
+  "status_code": 200
+}' http://localhost:3000/createEndpoint
 ```
 ```json
 {
     "success": "Resource created successfully!"
 }
 ```
-**Note**: When the schema key includes `[]`, it generates a list of properties. i.e. if your schema is `{ "lions[]": "animal.lion" }`, MockAPI will return `{ "lions": [<name of lions>] }`
+**Note:** If your schema key includes `[]`, MockAPI will intelligently generate a list of properties. For example, if your schema is `{ "lions[]": "animal.lion" }`, the response from MockAPI will be in the format `{ "lions": [<list of lion names>] }`.
 
-### Access Mock Endpoint
+
+### Accessing Your Endpoint
+Upon successful creation, you can access the newly added route at `http://localhost:3000/<name>`.
+Example:
 ```bash
-# <METHOD> /<NAME>
 curl http://localhost:3000/zoo
 ```
+Response:
 ```json
 {
     "location": "N Franklin Street",
@@ -121,3 +168,5 @@ curl http://localhost:3000/zoo
 ## Demo Usage
 
 ![Screen Recording 2024-02-16 at 18 02 09 (2) (1) (4)](https://github.com/mihneamanolache/MockAPI/assets/43548656/1a80a056-c9d6-4bca-83bc-a3e2505d1301)
+
+Feel free to explore and contribute to the project!
