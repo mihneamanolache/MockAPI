@@ -40,7 +40,7 @@ Response:
         "datatype.string",
         "datatype.uuid",
         "datatype.boolean",
-        ....
+        "...."
     ]
 }
 ```
@@ -78,7 +78,9 @@ IResource {
     status_code:    number      // HTTP response status code
 }
 ```
-**Note:** If`is_list` flag is enabled, the response will consist of an array containing replicated schema instances.
+**Notes:** 
+- If`is_list` flag is enabled, the response will consist of an array containing replicated schema instances.
+- If your schema key includes `[]`, MockAPI will intelligently generate a list of properties. For example, if your schema is `{ "lions[]": "animal.lion" }`, the response from MockAPI will be in the format `{ "lions": [<race>, <race>...] }`.
 
 Example:
 ```bash
@@ -104,8 +106,6 @@ curl -X POST \
     "success": "Resource created successfully!"
 }
 ```
-**Note:** If your schema key includes `[]`, MockAPI will intelligently generate a list of properties. For example, if your schema is `{ "lions[]": "animal.lion" }`, the response from MockAPI will be in the format `{ "lions": [<list of lion names>] }`.
-
 
 ### Accessing Your Endpoint
 Upon successful creation, you can access the newly added route at `http://localhost:3000/<name>`.
