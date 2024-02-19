@@ -1,6 +1,6 @@
 # MockAPI
 
-[**MockAPI**](https://github.com/mihneamanolache/MockAPI) is a powerful mock data API designed to streamline the development and testing of applications by providing dynamic and customizable mock data. Leveraging Express, Faker, and Knex, MockAPI offers a range of tools for generating, creating, and validating mock API endpoints based on predefined schemas.
+![Use MockAPI For Free](https://github.com/mihneamanolache/MockAPI/assets/43548656/8fad3cab-b871-4584-86b1-ff16f6e7fd44)
 
 ## NEW: Free Hosted API
 Accelerate your development process by leveraging MockAPI's *FREE hosted service at https://api.mockapi.xyz/*. Check out usage examples below.
@@ -10,6 +10,9 @@ Accelerate your development process by leveraging MockAPI's *FREE hosted service
 If you find MockAPI valuable and wish to support its servers and maintenance, you can show your appreciation by buying me a coffee! Your support goes a long way in ensuring the continued availability and improvement of this free service. Cheers to building amazing projects together!
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/mihnea.dev)
+
+
+[**MockAPI**](https://github.com/mihneamanolache/MockAPI) is a powerful mock data API designed to streamline the development and testing of applications by providing dynamic and customizable mock data. Leveraging Express, Faker, and Knex, MockAPI offers a range of tools for generating, creating, and validating mock API endpoints based on predefined schemas.
 
 ## Quick start
 Get started with MockAPI by cloning the repository and installing dependencies using npm:
