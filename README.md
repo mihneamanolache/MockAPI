@@ -7,6 +7,7 @@ Accelerate your development process by leveraging MockAPI's *FREE hosted service
 
 *Note: A captivating front-end experience is on the horizon, enhancing your MockAPI journey even further.*
 
+If you find MockAPI valuable and wish to support its servers and maintenance, you can show your appreciation by buying me a coffee! Your support goes a long way in ensuring the continued availability and improvement of this free service. Cheers to building amazing projects together!
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/mihnea.dev)
 
 ## Quick start
